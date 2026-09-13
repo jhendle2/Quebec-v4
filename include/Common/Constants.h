@@ -1,0 +1,6 @@
+#ifndef QUEBEC_CONSTANTS_H
+#define QUEBEC_CONSTANTS_H
+
+#define MAX_TOKEN_LEN 128
+
+#endif /* QUEBEC_CONSTANTS_H */
