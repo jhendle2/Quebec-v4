@@ -40,7 +40,6 @@
 *.app
 
 # Build directories
-build/
 Build/
 build-*/
 
@@ -70,4 +69,6 @@ Testing/
 
 .vscode
 bin/*
+!bin/.folder
 build/*
+!build/.folder
