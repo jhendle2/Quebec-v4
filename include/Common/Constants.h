@@ -2,5 +2,6 @@
 #define QUEBEC_CONSTANTS_H
 
 #define MAX_TOKEN_LEN 128
+#define MAX_DEBUG_MSG_LEN 128
 
 #endif /* QUEBEC_CONSTANTS_H */

@@ -1,0 +1,5 @@
+LALR(PT_Binop, TT_Identifier, PT_Args)
+LALR(PT_Binop, PT_Constant, PT_Binop)
+LALR(TT_Identifier, PT_Args, OP_BraceOpen)
+// LALR(PT_Type, PT_Expr, OP_Semicolon)
+LALR(PT_Type, PT_Expr, PT_Binop)

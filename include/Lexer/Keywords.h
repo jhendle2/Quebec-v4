@@ -14,6 +14,7 @@ typedef enum {
     NumKeywords,
 } Keyword;
 
+__attribute__((unused))
 static const char* strKeyword[NumKeywords] = {
     "Undefined",
     #define Keyword(E,S) #E,

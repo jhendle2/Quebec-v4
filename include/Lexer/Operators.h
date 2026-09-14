@@ -14,6 +14,7 @@ typedef enum {
     NumOperators,
 } Operator;
 
+__attribute__((unused))
 static const char* strOperator[NumOperators] = {
     "Undefined",
     #define Operator(E,S) #E,

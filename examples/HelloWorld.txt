@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+
+================================================
+`KW_Int`
+`TT_Identifier`
+`OP_ParenOpen`
+`OP_ParenClose`
+`OP_BraceOpen`
+`TT_Identifier`
+`OP_ParenOpen`
+`TT_ConstString`
+`OP_ParenClose`
+`OP_Semicolon`
+`KW_Return`
+`TT_ConstInt`
+`OP_Semicolon`
+`OP_BraceClose`
+

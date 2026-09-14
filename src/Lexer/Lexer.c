@@ -233,9 +233,7 @@ GSList* readStringAsTokens(const char* file_path, const char* string) {
 GSList* readFilePathAsTokens(const char* file_path) {
     char* file_text = readFileAsString(file_path);
     GSList* tokens = readStringAsTokens(file_path, file_text);
-
-    fprintTokens(stdout, tokens);
-
+    // fprintTokens(stdout, tokens);
     g_free(file_text);
     return tokens;
 }

@@ -23,7 +23,8 @@ typedef enum {
         #undef TokenType
     NumTokenTypes,
 } TokenType;
-    
+
+__attribute__((unused))
 static const char* strTokenType[NumTokenTypes] = {
     "Undefined",
     #define TokenType(E) #E,

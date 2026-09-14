@@ -1,0 +1,6 @@
+
+int func() {
+    int x = 5;
+    int y;
+    int z = x + y;
+}

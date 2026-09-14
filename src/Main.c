@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <glib.h>
 #include "Lexer/Lexer.h"
+#include "Parser/Parser.h"
 
 #include <ulog.h>
 #include <argparse.h>
@@ -54,6 +55,10 @@ int main(int argc, const char** argv) {
 
     // ------------------------------------------------
     GSList* tokens = readFilePathAsTokens(args.file_path);
+
+    ParseNode* parse_tree = buildParseTree(tokens);
+    fprintTreeParseNode(stdout, parse_tree, 0);
+
     destroyTokens(tokens);
     return EXIT_SUCCESS;
 }
