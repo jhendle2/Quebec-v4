@@ -38,6 +38,26 @@ void fprintTokens(FILE* fp, GSList* tokens) {
     }
 }
 
+void flistTokens(FILE* fp, GSList* tokens) {
+    if (tokens == NULL) {
+        fprintf(fp, "(null)");
+        return;
+    }
+
+    for (
+        GSList* iter = tokens;
+        iter;
+        iter = iter->next
+    ) {
+        const Token* token = iter->data;
+        if (token == NULL) {
+            fprintf(fp, "`(null)` ");
+        } else {
+            fprintf(fp, "`%s` ", token->text);
+        }
+    }
+}
+
 Token* newToken(
     const int row,
     const int col,
@@ -70,6 +90,29 @@ Token* newToken(
     }
 
     return token;
+}
+
+Token* copyToken(const Token* token) {
+    return newToken(
+        token->row,
+        token->col,
+        token->text,
+        token->file_path
+    );
+}
+
+GSList* copyTokens(GSList* tokens) {
+    // GSList* copied = NULL;
+    // for (
+    //     GSList* iter = tokens;
+    //     iter;
+    //     iter = iter->next
+    // ) {
+    //     const Token* token = iter->data;
+    //     if (token == NULL) break;
+    //     copied = g_slist_append(copied, copyToken(token));
+    // } return copied;
+    return NULL;
 }
 
 void destroyToken(Token* token) {

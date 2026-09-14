@@ -8,22 +8,27 @@
 ParseNode* tokenToParseNode(const Token* token) {
     ParseNode* node = g_new(ParseNode, 1);
     node->type = tokenToParseType(token);
+    node->tokens = NULL;
+    node->tokens = g_slist_append(node->tokens, (gpointer)token);
     node->left = node->right = node->parent = NULL;
     return node;
 }
 
-ParseNode* combineParseNodes2(const ParseType combined_type, __attribute__((unused)) ParseNode* left, __attribute__((unused)) ParseNode* right) {
+ParseNode* combineParseNodes2(const ParseType combined_type, ParseNode* left, ParseNode* right) {
     ParseNode* combined_node = g_new(ParseNode, 1);
     combined_node->type = reduceParseType1(combined_type);
     combined_node->left = combined_node->right = combined_node->parent = NULL;
-    // FIXME:
-    // Steal left's tokens
-    // combined_node->tokens = left->tokens;
-    // left->tokens = NULL;
+    // combined_node->tokens = NULL;
 
-    // // Steal right's tokens
-    // combined_node->tokens = g_slist_concat(combined_node->tokens, right->tokens);
-    // right->tokens = NULL;
+    // Copy left's tokens
+    if (left != NULL) {
+        combined_node->tokens = copyTokens(left->tokens);
+    }
+
+    // Copy right's tokens
+    if (right != NULL) {
+        combined_node->tokens = g_slist_concat(combined_node->tokens, copyTokens(right->tokens));
+    }
 
     return combined_node;
 }
@@ -31,7 +36,8 @@ ParseNode* combineParseNodes2(const ParseType combined_type, __attribute__((unus
 void fprintTreeParseNode(FILE* fp, const ParseNode* node, const int level) {
     if (node == NULL) return;
     for (int i = 0; i<level; i++) fprintf(fp, " *");
-    fprintf(fp, " %s\n", strParseType[node->type]);
+    fprintf(fp, " %s: ", strParseType[node->type]);
+    flistTokens(fp, node->tokens); fprintf(fp, "\n");
     fprintTreeParseNode(fp, node->left, level+1);
     fprintTreeParseNode(fp, node->right, level+1);
 }
@@ -163,7 +169,7 @@ ParseNode* buildParseTree(GSList* tokens) {
     ulog_debug("Reducing stack...");
     ParseNode* reduced2 = reduce2FromStack(stack, ParseTypeUndefined);
     if (reduced2 != NULL) tree = reduced2;
-    
+
     ParseNode* reduced1 = reduce1FromStack(stack); // FIXME: Is this still needed?
     if (reduced1 != NULL) tree = reduced1;
     

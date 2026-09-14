@@ -4,6 +4,7 @@
 #include <glib.h>
 #include "Lexer/Lexer.h"
 #include "Parser/Parser.h"
+#include "IR/IR.h"
 
 #include <ulog.h>
 #include <argparse.h>
@@ -58,6 +59,9 @@ int main(int argc, const char** argv) {
 
     ParseNode* parse_tree = buildParseTree(tokens);
     fprintTreeParseNode(stdout, parse_tree, 0);
+
+    GSList* irs = generateIRList(parse_tree);
+    fprintIRList(stdout, irs);
 
     destroyTokens(tokens);
     return EXIT_SUCCESS;

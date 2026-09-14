@@ -37,6 +37,10 @@ typedef struct {
 
 void fprintToken(FILE* fp, const Token* token);
 void fprintTokens(FILE* fp, GSList* tokens);
+void flistTokens(FILE* fp, GSList* tokens);
+
+Token* copyToken(const Token* token);
+GSList* copyTokens(GSList* token);
 
 Token* newToken(
     const int row,
